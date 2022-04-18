@@ -1,10 +1,40 @@
-
+import React, { useState } from "react"
+import axios from "axios"
 export const AddStudent = () => {
+  const [student,setStudent] =useState({
+    first_name:"",
+    last_name:"",
+    email:"",
+    gender:"",
+    age:"",
+    tenth_score:"",
+    twelth_score:"",
+    preferred_score:"",
+  })
+  const handleChange=(e)=>{
+    setStudent({
+        ...student,
+        [e.target.name]:e.target.value   
+    })
+      
+  }
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    axios.post('http://localhost:8080/students',student)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   return (
-    <form className="addstudent">
+    <form onSubmit={handleSubmit} className="addstudent">
       <div>
         Firstname:{" "}
         <input
+        onChange={handleChange}
           type="text"
           name="first_name"
           className="first_name"
@@ -15,6 +45,7 @@ export const AddStudent = () => {
         {" "}
         Last Name:
         <input
+          onChange={handleChange}
           type="text"
           name="last_name"
           className="last_name"
@@ -25,6 +56,7 @@ export const AddStudent = () => {
         {" "}
         Email:
         <input
+         onChange={handleChange}
           type="email"
           name="email"
           className="email"
@@ -37,6 +69,7 @@ export const AddStudent = () => {
         <div>
           Male
           <input
+           onChange={handleChange}
             name="gender"
             className="male"
             type="radio"
@@ -44,6 +77,7 @@ export const AddStudent = () => {
           />{" "}
           Female{" "}
           <input
+           onChange={handleChange}
             name="gender"
             className="female"
             type="radio"
@@ -54,6 +88,7 @@ export const AddStudent = () => {
       <div>
         Age{" "}
         <input
+         onChange={handleChange}
           type="number"
           name="age"
           className="age"
@@ -63,6 +98,7 @@ export const AddStudent = () => {
       <div>
         Tenth Score:{" "}
         <input
+         onChange={handleChange}
           type="number"
           name="tenth_score"
           className="tenth_score"
@@ -95,9 +131,9 @@ export const AddStudent = () => {
 
       <input className="submit" type="submit" value="Submit" />
       {
-        <div className="error">
+        // <div className="error">
 
-        </div>
+        // </div>
         // show this div with proper error before submitting form, if there's anything not provided
         // eg: first name missing, age cannot be greater than 100 etc
       }

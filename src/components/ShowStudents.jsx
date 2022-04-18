@@ -1,8 +1,10 @@
+import React from "react"
 export const ShowStudents = () => {
   // const sorted=Ascending.sort((a,b)=>{
   //   const isReversed=(sortBy==="ascending") ? 1 : -1;
   //   return isReversed*a.first_name
   // })
+  
   return (
     <div>
       <div className="controls">

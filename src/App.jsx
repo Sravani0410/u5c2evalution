@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useEffect } from "react/cjs/react.production.min";
+import { useEffect } from "react";
 import database from "./db.json"
+import React from "react"
 import { AddStudent } from "./components/AddStudent";
 import { ShowStudents } from "./components/ShowStudents";
 
 
 function App() {
-  //  const [dataBase,setDataBase]=useState([])
+    const [dataBase,setDataBase]=useState(false)
   // useEffect(()=>{
   //   fetch(`http:localhost:8080/students`)
   //   .then(response=>response.json())
@@ -33,11 +34,11 @@ function App() {
     <div className="App">
       
       <button className="togglebtn" onClick={()=>{
-       <AddStudent/>
+       setDataBase(!dataBase)
       }}>Add a new student
-      
+    
       </button>
-      <ShowStudents/>
+      {dataBase? <AddStudent />:<ShowStudents />}
       {/* database={database} */}
       {/* Show either  AddStudent component or ShowStudents dependeing on the above button click  */}
       {/* make sure the table is shown initially, do not show form initially */}
